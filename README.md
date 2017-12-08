@@ -1,2 +1,3 @@
 # my-first-laravel-project
-My final year project 2017-2018.
+
+Website management product distribution by laravel framework.
