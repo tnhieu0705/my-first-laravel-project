@@ -50,7 +50,7 @@ $rootPath = asset('/');
   <footer class="sticky-footer">
     <div class="container">
       <div class="text-center">
-        <small>Copyright © Your Website 2017</small>
+        <small>Copyright © CTU - Trần Ngọc Hiếu 8/2017</small>
       </div>
     </div>
   </footer>
@@ -78,6 +78,7 @@ $rootPath = asset('/');
   <script src="<?php echo e($rootPath); ?>templates/backend/js/sb-admin.min.js"></script>
   <!-- Custom scripts for this page-->
   <script src="<?php echo e($rootPath); ?>templates/backend/js/sb-admin-datatables.min.js"></script>
+  
   
   <?php $__env->startSection('thuVien'); ?>
   <?php echo $__env->yieldSection(); ?>

@@ -112,9 +112,40 @@ class SanphamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SanphamRequest $request, $id)
     {
-        //
+        try {
+            $sanpham = Sanpham::where('sp_ma',  $id)->first();
+            if ($sanpham) {
+                $sanpham->sp_ten      = $request->ten;
+                $sanpham->sp_giaGoc   = $request->giaGoc;
+                $sanpham->sp_giaBan   = $request->giaBan;
+                $sanpham->sp_thongTin = $request->thongTin;
+                $sanpham->sp_xuatXu   = $request->xuatXu;
+                $sanpham->l_ma        = $request->maLoai;
+                $sanpham->save();
+
+                return response([
+                    'error'   => false,
+                    'message' => $sanpham->toJson()
+                ], 200);
+            } else {
+                return response([
+                    'error'   => true,
+                    'message' => 'Không tìm thấy Sanpham[{$id}]'
+                ], 200);
+            }
+        } catch(QueryException $ex) {
+            return response([
+                'error'   => true,
+                'message' => $ex->getMessage()
+            ], 200);
+        } catch (PDOException  $ex) {
+            return response([
+                'error'   => true,
+                'message' => $ex->getMessage()
+            ], 200);
+        }
     }
 
     /**

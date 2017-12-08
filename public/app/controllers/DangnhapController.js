@@ -7,6 +7,7 @@ $(document).ready(function() {
 		}
 	});
 
+	// Xử lý đăng nhập
 	$('#dang-nhap').click(function(e) {
 		e.preventDefault();
 		var email   = $('#email').val();
@@ -28,7 +29,11 @@ $(document).ready(function() {
 						$('#login-errors').slideUp(500);
 					});
 				} else {
-					location.href = baseUrl + 'quantri/tongquan';
+					if(response.role == 'nhanvien') {
+						location.href = baseUrl + 'quantri/tongquan';
+					} else {
+						location.href = baseUrl;
+					}
 				}
 			},
 			error: function(response) {
@@ -37,6 +42,7 @@ $(document).ready(function() {
 		});
 	});
 
+	// Xử lý đăng xuất
 	$('#dang-xuat').click(function(e) {
 		e.preventDefault();
 

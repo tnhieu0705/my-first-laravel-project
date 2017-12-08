@@ -50,7 +50,7 @@ $rootPath = asset('/');
   <footer class="sticky-footer">
     <div class="container">
       <div class="text-center">
-        <small>Copyright © Your Website 2017</small>
+        <small>Copyright © CTU - Trần Ngọc Hiếu 8/2017</small>
       </div>
     </div>
   </footer>
@@ -79,6 +79,7 @@ $rootPath = asset('/');
   <!-- Custom scripts for this page-->
   <script src="{{ $rootPath }}templates/backend/js/sb-admin-datatables.min.js"></script>
   {{-- <script src="{{ $rootPath }}templates/backend/js/sb-admin-charts.min.js"></script> --}}
+  
   @section('thuVien')
   @show
 

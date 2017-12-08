@@ -46,11 +46,11 @@
 						<td align="left">{{ $loaisanpham->l_ten }}</td>
 						@endif
 						<td align="left">{{ $loaisanpham->thuocChuDe->cd_ten }}</td>					
-						<td align="center" data-id="{{ $loaisanpham->l_ma }}">
-							<button type="button" class="btn btn-info btn-xs get-modalEdit" data-toggle="modal" data-target="#modal-create" data-placement="bottom" title="Chỉnh sửa">
+						<td align="center">
+							<button type="button" class="btn btn-info btn-xs get-modalEdit" data-toggle="modal" data-target="#modal-create" data-placement="bottom" title="Chỉnh sửa" onclick="getModalEdit({{ $loaisanpham->l_ma }})">
 								<i class="fa fa-fw fa-pencil-square-o"></i>
 							</button>
-							<button type="button" class="btn btn-danger btn-xs xoa" data-placement="bottom" title="Xóa">
+							<button type="button" class="btn btn-danger btn-xs xoa" data-placement="bottom" title="Xóa" onclick="deleteCategory({{ $loaisanpham->l_ma }})">
 								<i class="fa fa-fw fa-trash-o"></i>
 							</button>
 						</td>
@@ -130,7 +130,7 @@
 				"next": '<i class="fa fa-fw fa-forward"></i>',
 				"previous": '<i class="fa fa-fw fa-backward"></i>'
 			},
-			"search": "Tìm kiếm:",
+			"search": "Tìm kiếm",
 		},
 		"ordering": false,
 	} );

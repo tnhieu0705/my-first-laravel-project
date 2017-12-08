@@ -20,10 +20,11 @@ function stripUnicode($str){
 	);
 
 	foreach($unicode as $khongDau => $coDau) {
-		$arr = explode("|", $coDau);
-		$str = str_replace($arr, $khongDau, $str);
+		$arr      = explode("|", $coDau);
+		$str      = str_replace($arr, $khongDau, $str);
+		$strLower = strtolower($str);
 	}
-	return $str;
+	return str_replace(" ", "-", $strLower);
 }
 
 

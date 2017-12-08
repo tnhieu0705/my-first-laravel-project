@@ -27,7 +27,7 @@ $('#them-moi').click(function(e) {
 	sdt      = $('#sdt').val();
 	email    = $('#email').val();
 	// var matKhau = $('#mat-khau').val();
-	maQuyen  = $('.quyen:checked').val();
+	maQuyen  = $('#quyen').val();
 	
 	$.ajax({
 		dataType: 'json',
@@ -67,10 +67,7 @@ $('#them-moi').click(function(e) {
 /*
 Lấy dữ liệu lên #modal edit
 */
-$('.get-modalEdit').click(function(e) {
-	e.preventDefault();
-	var id = $(this).parent('td').data('id');
-	// alert(id);
+function getModalEdit(id) {
 	$('.modal-title').html('Chỉnh sửa nhân viên');
 	var bts = '';
 	bts += '<button type="button" class="btn btn-default" data-dismiss="modal" id="huy">Hủy</button>';
@@ -92,8 +89,7 @@ $('.get-modalEdit').click(function(e) {
 			$('#dia-chi').val(response.nv_diaChi);
 			$('#sdt').val(response.nv_dienThoai);
 			$('#email').val(response.nv_email);
-			if(response.q_ma == 1) { $('#rdo-thuong').prop('checked', true); }
-			else { $('#rdo-quantri').prop('checked', true); }
+			$('#quyen').val(response.q_ma);
 		}
 	}).done(function(e) {
 		$('.close').on('click', function() {
@@ -114,7 +110,7 @@ $('.get-modalEdit').click(function(e) {
 			diaChi   = $('#dia-chi').val();
 			sdt      = $('#sdt').val();
 			email    = $('#email').val();
-			maQuyen  = $('.quyen:checked').val();
+			maQuyen  = $('#quyen').val();
 			
 			$.ajax({
 				dataType: 'json',
@@ -140,15 +136,12 @@ $('.get-modalEdit').click(function(e) {
 			});
 		});
 	});
-});
+}
 
 /*
 Xử lý sự kiện xóa nhân viên #id
 */
-$('.xoa').click(function(e) {
-	e.preventDefault();
-	var id  = $(this).parent('td').data('id');
-	
+function deleteEmployee(id) {
 	var del = confirm("Bạn chắc chắn muốn xóa ?");
 	if(del) {
 		$.ajax({
@@ -173,7 +166,17 @@ $('.xoa').click(function(e) {
 		});
 	}
 	else return false;
-});
+}
+
+// Kiểm tra quyền truy cập
+function ktQuyen(quyen, address) {
+	if(quyen == 1) {
+		alert('Không có quyền truy cập');
+		return false;
+	} else {
+		location.href = baseUrl + address;
+	}
+}
 
 // Định dạng #date yyyy-mm-dd
 function getDate(datetime) {
@@ -199,7 +202,7 @@ function refreshModal() {
 	$('#dia-chi').val('');
 	$('#sdt').val('');
 	$('#email').val('');
-	document.getElementById('rdo-thuong').checked = true;
+	$('#quyen').val(1);
 }
 
 // Xử liệu lỗi nhập liệu #request validation errors.

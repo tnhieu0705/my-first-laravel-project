@@ -59,9 +59,7 @@ $('#them-moi').click(function(e) {
 /*
 Lấy dữ liệu lên #modal edit
 */
-$('.get-modalEdit').click(function(e) {
-	e.preventDefault();
-	var id = $(this).parent('td').data('id');
+function getModalEdit(id) {
 	$('.modal-title').html('Chỉnh sửa loại sản phẩm');
 	var bts = '';
 	bts += '<button type="button" class="btn btn-default" data-dismiss="modal" id="huy">Hủy</button>';
@@ -79,7 +77,7 @@ $('.get-modalEdit').click(function(e) {
 			$('#dien-giai').val(response.l_dienGiai);
 			$('#chu-de').val(response.cd_ma);
 		},
-	}).done(function(e) {
+	}).done(function() {
 		$('.close').on('click', function() {
 			window.location.reload();
 		});
@@ -124,14 +122,12 @@ $('.get-modalEdit').click(function(e) {
 			});
 		});
 	});
-});
+}
 
 /*
 Xử lý sự kiện #xóa loại sản phẩm
 */
-$('.xoa').click(function(e) {
-	e.preventDefault();
-	var id  = $(this).parent('td').data('id');
+function deleteCategory(id) {
 	var del = confirm("Bạn chắc chắn muốn xóa ?");
 	if(del) {
 		$.ajax({
@@ -171,7 +167,7 @@ $('.xoa').click(function(e) {
 		});
 	}
 	else return false;
-});
+}
 
 // Làm mới #Modal
 function refreshModal() {

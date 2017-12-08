@@ -25,7 +25,7 @@ class SanphamRequest extends FormRequest
     {
 
         return [
-            'ten'      => 'required|min:2|max:200|unique:sanpham,sp_ten,'.$this->get('id').',sp_ma',
+            'ten'      => 'required|min:2|max:200|unique:sanpham,sp_ten,'.$this->segment(3).',sp_ma',
             'giaGoc'   => 'required|numeric|max:4200000000',
             'giaBan'   => 'required|numeric|max:4200000000',
             'thongTin' => 'nullable',

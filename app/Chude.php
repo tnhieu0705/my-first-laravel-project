@@ -23,6 +23,6 @@ class Chude extends Model
 
 	public function coLoaiSanPham()
     {
-     return $this->hasMany('App\Loaisanpham', 'cd_ma', 'cd_ma');
+        return $this->hasMany('App\Loaisanpham', 'cd_ma', 'cd_ma');
     }
 }

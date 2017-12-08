@@ -6,6 +6,7 @@ use Illuminate\Database\QueryException;
 use App\Http\Requests\NhanvienRequest;
 use Illuminate\Http\Request;
 use App\Nhanvien;
+use App\Quyen;
 use DB;
 
 class NhanvienController extends Controller
@@ -18,6 +19,7 @@ class NhanvienController extends Controller
     public function index()
     {
         try {
+            $ds_quyen    = Quyen::all();
             $ds_nhanvien = Nhanvien::where('nv_ma', '>', '1')->get();
             // $json        = json_encode($ds_nhanvien);
         } catch(QueryException $ex) {
@@ -31,7 +33,10 @@ class NhanvienController extends Controller
                 'message' => $ex->getMessage()
             ], 200);
         }
-        return view('quantri/nhanvien', ['ds_nhanvien' => $ds_nhanvien]);
+        return view('quantri/nhanvien', [
+            'ds_quyen'    => $ds_quyen,
+            'ds_nhanvien' => $ds_nhanvien
+        ]);
     }
 
     /**

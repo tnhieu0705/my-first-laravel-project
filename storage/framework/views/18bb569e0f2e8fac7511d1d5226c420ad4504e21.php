@@ -26,7 +26,7 @@
 		<!-- Example DataTables Card-->
 		<div class="table-responsive" style="padding-bottom: 18px">
 			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-				<thead>
+				<thead >
 					<tr class="odd gradeX" align="center">
 						<th>Họ tên</th>
 						<th>Email</th>
@@ -42,15 +42,15 @@
 						<td align="left"><?php echo e($nhanvien->nv_email); ?></td>
 						<td align="left"><?php echo e($nhanvien->nv_dienThoai); ?></td>
 						<?php if($nhanvien->nv_gioiTinh == 1): ?>
-						<td align="left">Nam</td>
+						<td align="center"><i class="fa fa-fw fa-male"></td>
 						<?php else: ?>
-						<td align="left">Nữ</td>
+						<td align="center"><i class="fa fa-fw fa-female"></td>
 						<?php endif; ?>						
-						<td align="center" data-id="<?php echo e($nhanvien->nv_ma); ?>">
-							<button type="button" class="btn btn-info btn-xs get-modalEdit" data-toggle="modal" data-target="#modal-create" data-placement="bottom" title="Chỉnh sửa">
+						<td align="center">
+							<button type="button" class="btn btn-info btn-xs get-modalEdit" data-toggle="modal" data-target="#modal-create" data-placement="bottom" title="Chỉnh sửa" onclick="getModalEdit(<?php echo e($nhanvien->nv_ma); ?>)">
 								<i class="fa fa-fw fa-pencil-square-o"></i>
 							</button>
-							<button type="button" class="btn btn-danger btn-xs xoa" data-placement="bottom" title="Xóa">
+							<button type="button" class="btn btn-danger btn-xs xoa" data-placement="bottom" title="Xóa" onclick="deleteEmployee(<?php echo e($nhanvien->nv_ma); ?>)">
 								<i class="fa fa-fw fa-trash-o"></i>
 							</button>
 						</td>
@@ -111,15 +111,12 @@
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label" for="ten">Cấp quyền</label>
-						<label class="form-check-label">
-							<input class="form-check-inline quyen" type="radio" name="rdoQuyen" id="rdo-thuong" value="1" checked="">
-							Thường
-						</label>
-						<label class="form-check-label">
-							<input class="form-check-inline quyen" type="radio" name="rdoQuyen" id="rdo-quantri" value="2">
-							Quản trị
-						</label>
+						<label class="control-label">Cấp quyền</label>
+						<select class="form-control" name="quyen" id="quyen">
+							<?php $__currentLoopData = $ds_quyen; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $quyen): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+							<option value="<?php echo e($quyen->q_ma); ?>"><?php echo e($quyen->q_ten); ?></option>
+							<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+						</select>
 					</div>
 				</form>
 			</div>
@@ -133,19 +130,19 @@
 
 <!-- Modal dialog #hiển thị thông báo -->
 <div class="modal fade" id="modal-dialog" tabindex="-1" role="dialog">
-  	<div class="modal-dialog" role="document">
-    	<div class="modal-content">
-      		<div class="modal-header">
-      			<h4 class="modal-title"></h4>
-        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      		</div>
-      		<div class="modal-body">
-        		<div class="alert alert-success" id="message">
-        			<!-- Nội dung #thông báo -->
-        		</div>
-      		</div>
-    	</div>
-  	</div>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title"></h4>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="alert alert-success" id="message">
+					<!-- Nội dung #thông báo -->
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <?php $__env->stopSection(); ?>
 
@@ -157,7 +154,7 @@
 				"next": '<i class="fa fa-fw fa-forward"></i>',
 				"previous": '<i class="fa fa-fw fa-backward"></i>'
 			},
-			"search": "Tìm kiếm:",
+			"search": "Tìm kiếm",
 		},
 		"ordering": false,
 	} );

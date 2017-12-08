@@ -14,11 +14,16 @@ class Nhanvien extends Model
     protected $primaryKey   = 'nv_ma';
     protected $dates        = ['nv_ngaySinh'];
 
-    public $timestamps = true;
+    public $timestamps      = true;
 
     public function getCreatedAtAttribute($value) 
 	{
         Carbon::setLocale('vi');
 		return Carbon::createFromFormat('Y-m-d H:i:s', $value)->diffForHumans();
 	}
+
+    public function thuocQuyen()
+    {
+        return $this->belongsTo('App\Quyen', 'q_ma', 'q_ma');
+    }
 }

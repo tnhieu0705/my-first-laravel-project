@@ -57,8 +57,8 @@ class LoaisanphamController extends Controller
             'dienGiai.max' => 'Diễn giải loại sản phẩm tối đa 150 ký tự'
         ];
 
-        $val = Validator::make($request->all(), $rules, $messages);
-        if($val->fails()) {
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()) {
             return response()->json([
                 'error'   => true,
                 'message' => $val->errors()

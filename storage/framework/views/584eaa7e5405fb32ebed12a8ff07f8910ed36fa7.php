@@ -14,6 +14,33 @@
 	line-height: 1.5;
 	border-radius: 0.2rem;
 }
+.form-image {
+  height: auto;
+  display: block;
+  margin: auto;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  border: solid 1px #ccc;
+  background-color: #fff; 
+  background-image: none; 
+  border-radius: 4px;
+}
+
+.image-display {
+  border-radius: 6px;
+  height: 10rem;
+  width: 8.2rem;
+  margin: 5px 6px;
+}
+
+.delete-image {
+  height: auto;
+  width: auto;
+  position: relative;
+  top: -74px;
+  left: -20px;
+}
 </style>
 
 <div class="row">
@@ -31,7 +58,7 @@
 						<th>Tên sản phẩm</th>
 						<th>Giá gốc</th>
 						<th>Giá bán</th>
-						<th>Xuất xứ</th>
+						<th>Số lượng</th>
 						<th>Loại</th>
 						<th></th>
 					</tr>
@@ -42,13 +69,16 @@
 						<td align="left"><?php echo e($sanpham->sp_ten); ?></td>
 						<td align="left"><?php echo e(number_format($sanpham->sp_giaGoc)); ?></td>
 						<td align="left"><?php echo e(number_format($sanpham->sp_giaBan)); ?></td>
-						<td align="left"><?php echo e($sanpham->sp_xuatXu); ?></td>
+						<td align="left"><?php echo e($sanpham->sp_soLuong); ?></td>
 						<td align="left"><?php echo e($sanpham->thuocLoaiSanPham->l_ten); ?></td>					
-						<td align="center" data-id="<?php echo e($sanpham->sp_ma); ?>">
-							<button type="button" class="btn btn-info btn-xs get-modalEdit" data-toggle="modal" data-target="#modal-create" data-placement="bottom" title="Chỉnh sửa">
+						<td align="center">
+							<button type="button" class="btn btn-warning btn-xs get-modalImage" data-placement="bottom" data-toggle="modal" data-target="#modalImages" title="Thêm ảnh" onclick="getModalImage(<?php echo e($sanpham->sp_ma); ?>)">
+								<i class="fa fa-fw fa-picture-o"></i>
+							</button>
+							<button type="button" class="btn btn-info btn-xs get-modalEdit" data-toggle="modal" data-target="#modal-create" data-placement="bottom" title="Chỉnh sửa" onclick="getModalEdit(<?php echo e($sanpham->sp_ma); ?>)">
 								<i class="fa fa-fw fa-pencil-square-o"></i>
 							</button>
-							<button type="button" class="btn btn-danger btn-xs xoa" data-placement="bottom" title="Xóa">
+							<button type="button" class="btn btn-danger btn-xs xoa" data-placement="bottom" title="Xóa" onclick="deleteProduct(<?php echo e($sanpham->sp_ma); ?>)">
 								<i class="fa fa-fw fa-trash-o"></i>
 							</button>
 						</td>
@@ -95,14 +125,6 @@
 						<input class="form-control" type="text" value="" name="ten" id="ten">
 					</div>
 					<div class="form-group">
-						<label class="control-label">Giá gốc sản phẩm</label>
-						<input class="form-control" type="number" value="" name="giaGoc" id="gia-goc">
-					</div>
-					<div class="form-group">
-						<label class="control-label">Giá bán sản phẩm</label>
-						<input class="form-control" type="number" value="" name="giaBan" id="gia-ban">
-					</div>
-					<div class="form-group">
 						<label class="control-label">Xuất xứ sản phẩm</label>
 						<input class="form-control" type="text" value="" name="xuatXu" id="xuat-xu">
 					</div>
@@ -118,7 +140,38 @@
 			</div>
 		</div><!-- /Modal #content--> 
 	</div><!-- /Modal #dialog--> 
-</div><!-- /Modal #end-->   
+</div><!-- /Modal #end-->
+
+<!-- Modal hình ảnh -->
+<div class="modal fade" id="modalImages" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Quản lý hình ảnh</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label class="control-label" for="ten">Hình ảnh</label>
+					<div class="form-image" id="form-image">
+						
+					</div>
+				</div>
+				<form action="" method="POST" enctype="multipart/form-data" class="upload-form">
+					<div class="form-group">
+						<label class="control-label" for="ten">Upload ảnh</label>
+						<input type="file" name="hinhAnh" id="upload-image">
+						<div class="help-block with-errors"></div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default huy" data-dismiss="modal">Hủy</button>
+				<button type="button" class="btn btn-primary" id="upload-hinh">Thêm ảnh</button>
+			</div>
+		</div><!-- /Modal content-->
+	</div><!-- /Modal dialog-->
+</div><!-- /Modal-->   
 
 <!-- Modal dialog #hiển thị thông báo -->
 <div class="modal fade" id="modal-dialog" tabindex="-1" role="dialog">

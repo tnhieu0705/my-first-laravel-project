@@ -1,13 +1,13 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-  <a class="navbar-brand" href="index.html">Hệ thống quản lý</a>
+  <a class="navbar-brand" href="#">Hệ thống quản lý</a>
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarResponsive">
     <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Trang chủ">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{ asset('/') }}">
           <i class="fa fa-fw fa-home"></i>
           <span class="nav-link-text">Trang chủ</span>
         </a>
@@ -18,7 +18,6 @@
           <span class="nav-link-text">Tổng quan</span>
         </a>
       </li>
-      @if(in_array(Session::get('nhanvien_quyen'), [2]))
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Quản lý hàng hóa">
         <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#hang-hoa" data-parent="#exampleAccordion">
           <i class="fa fa-fw fa-industry"></i>
@@ -53,11 +52,23 @@
           </li> --}}
         </ul>
       </li>
+      @if(in_array(Session::get('nhanvien_quyen'), [2]))
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Quản lý khách hàng">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="{{ asset('quantri/khachhang') }}">
           <i class="fa fa-fw fa-user"></i>
-          <span class="nav-link-text">Quản lý khách hàng</span>
+          <span class="nav-link-text">Khách hàng</span>
         </a>
+      </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Hóa đơn chứng từ">
+        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#hoa-don" data-parent="#exampleAccordion">
+          <i class="fa fa-fw fa-list"></i>
+          <span class="nav-link-text">Hóa đơn chứng từ</span>
+        </a>
+        <ul class="sidenav-second-level collapse" id="hoa-don">
+          <li>
+            <a href="{{ asset('quantri/donhang') }}">Đơn hàng</a>
+          </li>
+        </ul>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Quản lý nhân sự">
         <a class="nav-link" href="{{ asset('quantri/nhanvien') }}">

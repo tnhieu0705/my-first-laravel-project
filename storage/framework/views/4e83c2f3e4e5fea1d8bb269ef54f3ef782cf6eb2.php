@@ -44,11 +44,11 @@
 						<td align="left"><?php echo e($loaisanpham->l_ten); ?></td>
 						<?php endif; ?>
 						<td align="left"><?php echo e($loaisanpham->thuocChuDe->cd_ten); ?></td>					
-						<td align="center" data-id="<?php echo e($loaisanpham->l_ma); ?>">
-							<button type="button" class="btn btn-info btn-xs get-modalEdit" data-toggle="modal" data-target="#modal-create" data-placement="bottom" title="Chỉnh sửa">
+						<td align="center">
+							<button type="button" class="btn btn-info btn-xs get-modalEdit" data-toggle="modal" data-target="#modal-create" data-placement="bottom" title="Chỉnh sửa" onclick="getModalEdit(<?php echo e($loaisanpham->l_ma); ?>)">
 								<i class="fa fa-fw fa-pencil-square-o"></i>
 							</button>
-							<button type="button" class="btn btn-danger btn-xs xoa" data-placement="bottom" title="Xóa">
+							<button type="button" class="btn btn-danger btn-xs xoa" data-placement="bottom" title="Xóa" onclick="deleteCategory(<?php echo e($loaisanpham->l_ma); ?>)">
 								<i class="fa fa-fw fa-trash-o"></i>
 							</button>
 						</td>
@@ -128,7 +128,7 @@
 				"next": '<i class="fa fa-fw fa-forward"></i>',
 				"previous": '<i class="fa fa-fw fa-backward"></i>'
 			},
-			"search": "Tìm kiếm:",
+			"search": "Tìm kiếm",
 		},
 		"ordering": false,
 	} );

@@ -21,7 +21,7 @@ class CreateDonhangTable extends Migration
             $table->string('dh_diaChi', 255)->comment('Địa chỉ người nhận');
             $table->string('dh_dienThoai', 12)->comment('Số điện thoại người nhận');
             $table->unsignedSmallInteger('nv_xuLy')->default('1')->comment('Mã nhân viên (người xử lý đơn hàng)');
-            $table->unsignedTinyInteger('dh_trangThai')->default('1')->comment('Trạng thái đơn hàng: 1-nhận đơn, 2-xử lý đơn, 3-giao hàng, 4-hoàn tất, 5-đổi trả, 6-hủy');
+            $table->unsignedTinyInteger('dh_trangThai')->default('1')->comment('Trạng thái đơn hàng: 1-nhận đơn, 2-xử lý đơn');
             $table->timestamps();
 
             $table->foreign('kh_ma')->references('kh_ma')->on('khachhang')->onDelete('CASCADE')->onUpdate('CASCADE');

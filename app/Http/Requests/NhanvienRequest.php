@@ -28,7 +28,7 @@ class NhanvienRequest extends FormRequest
             'hoTen'    => 'required|min:2|max:100',
             'ngaySinh' => 'required',
             'diaChi'   => 'nullable|min:2|max:255',
-            'sdt'      => 'nullable|unique:nhanvien,nv_dienThoai,'.$this->segment(3).',nv_ma|digits_between:11,12|numeric',
+            'sdt'      => 'nullable|unique:nhanvien,nv_dienThoai,'.$this->segment(3).',nv_ma|digits_between:10,12|numeric',
             'email'    => 'email|required|unique:nhanvien,nv_email,'.$this->segment(3).',nv_ma|max:100'
         ];
     }

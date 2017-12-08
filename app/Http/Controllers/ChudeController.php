@@ -14,8 +14,9 @@ class ChudeController extends Controller
 
     public function getList($id)
     {
+        $chude = Chude::find($id);
         $ds_loaisanpham = Loaisanpham::where('cd_ma', $id)->orderBy('created_at', 'desc')->get();
-        return view('quantri/chude_loaisanpham', ['ds_loaisanpham' => $ds_loaisanpham]);
+        return view('quantri/chude_loaisanpham', ['chude' => $chude, 'ds_loaisanpham' => $ds_loaisanpham]);
     }
 
     /**
